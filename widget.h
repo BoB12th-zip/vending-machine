@@ -14,9 +14,10 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
-    int money = 0;
-    void changeMoney(int diff);
-    void updateState();
+    int balance = 0;
+    void changeBalance(int);
+    void updateButtonState();
+    void returnBalance(int, int&, int&, int&);
 
 private slots:
     void on_pb10_clicked();
