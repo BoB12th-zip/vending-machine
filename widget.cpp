@@ -95,6 +95,7 @@ void Widget::on_pbReset_clicked()
     QMessageBox mb;
     mb.information(nullptr, "title","text");
     Widget::money = 0;
+    ui->lcdNumber->display(Widget::money);
     updateState();
 }
 
