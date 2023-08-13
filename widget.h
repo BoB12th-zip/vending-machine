@@ -17,20 +17,15 @@ public:
     int balance = 0;
     void changeBalance(int);
     void updateButtonState();
-    void returnBalance(int, int&, int&, int&);
+    void returnBalance(int, int&, int&, int&, int&);
 
 private slots:
     void on_pb10_clicked();
-
     void on_pb50_clicked();
-
     void on_pb100_clicked();
     void on_pbCoffee_clicked();
-
     void on_pbTea_clicked();
-
     void on_pbMilk_clicked();
-
     void on_pbReset_clicked();
 
 private:

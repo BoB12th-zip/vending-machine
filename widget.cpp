@@ -15,30 +15,9 @@ Widget::Widget(QWidget *parent)
 
 void Widget::updateButtonState()
 {
-    if(Widget::balance >= 100)
-    {
-        ui->pbCoffee->setEnabled(true);
-    }
-    else
-    {
-        ui->pbCoffee->setEnabled(false);
-    }
-    if(Widget::balance >= 150)
-    {
-        ui->pbTea->setEnabled(true);
-    }
-    else
-    {
-        ui->pbTea->setEnabled(false);
-    }
-    if(Widget::balance >= 200)
-    {
-        ui->pbMilk->setEnabled(true);
-    }
-    else
-    {
-        ui->pbMilk->setEnabled(false);
-    }
+    ui->pbCoffee->setEnabled(balance >= 100);
+    ui->pbTea->setEnabled(Widget::balance >= 150);
+    ui->pbMilk->setEnabled(Widget::balance >= 200);
 }
 
 Widget::~Widget()
@@ -48,8 +27,8 @@ Widget::~Widget()
 
 void Widget::changeBalance(int diff)
 {
-    Widget::balance += diff;
-    ui->lcdNumber->display(Widget::balance);
+    balance += diff;
+    ui->lcdNumber->display(balance);
     updateButtonState();
 }
 
@@ -89,27 +68,30 @@ void Widget::on_pbMilk_clicked()
     changeBalance(-200);
 }
 
-void Widget::returnBalance(int balance, int& coin_500, int& coin_100, int& coin_10) {
+void Widget::returnBalance(int balance, int& coin_500, int& coin_100, int& coin_50, int& coin_10) {
     coin_500 = balance / 500;
     balance %= 500;
 
     coin_100 = balance / 100;
     balance %= 100;
 
+    coin_50 = balance / 50;
+    balance %= 50;
+
     coin_10 = balance / 10;
 }
 
 void Widget::on_pbReset_clicked()
 {
-    int coin_500, coin_100, coin_10;
-    returnBalance(Widget::balance, coin_500, coin_100, coin_10);
-    QString balanceFormat = QString("500won coin : %1, 100won coin : %2, 10won coin : %3")
-                                .arg(coin_500).arg(coin_100).arg(coin_10);
+    int coin_500, coin_100, coin_50, coin_10;
+    returnBalance(balance, coin_500, coin_100, coin_50, coin_10);
+    QString balanceFormat = QString("500won coin : %1, 100won coin : %2, 50won coin: %3, 10won coin : %4")
+                                .arg(coin_500).arg(coin_100).arg(coin_50).arg(coin_10);
     QMessageBox mb;
     mb.information(nullptr, "Exchange state", balanceFormat);
 
-    Widget::balance = 0;
-    ui->lcdNumber->display(Widget::balance);
+    balance = 0;
+    ui->lcdNumber->display(balance);
     updateButtonState();
 }
 
