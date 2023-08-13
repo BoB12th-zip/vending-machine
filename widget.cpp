@@ -16,8 +16,8 @@ Widget::Widget(QWidget *parent)
 void Widget::updateButtonState()
 {
     ui->pbCoffee->setEnabled(balance >= 100);
-    ui->pbTea->setEnabled(Widget::balance >= 150);
-    ui->pbMilk->setEnabled(Widget::balance >= 200);
+    ui->pbTea->setEnabled(balance >= 150);
+    ui->pbMilk->setEnabled(balance >= 200);
 }
 
 Widget::~Widget()
